@@ -6,7 +6,7 @@ import { createOrder } from "../../services/apiRestaurant";
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 const fakeCart = [
@@ -59,7 +59,7 @@ function CreateOrder() {
             <input type="tel" name="phone" required />
           </div>
           {/* Conditional rendering of the errors */}
-          {formErrors.phone && <p>{formErrors.phone}</p>}
+          {formErrors?.phone && <p>{formErrors?.phone}</p>}
         </div>
 
         <div>
@@ -103,7 +103,7 @@ export async function action({ request }) {
 
   //ERROR HANDLING INSIDE THE FORM
   const errors = {};
-  if (!isValidPhone(order.phone))
+  if (!isValidPhone(order?.phone))
     errors.phone =
       "Please put a correct phone number, we might need it to contact you.";
   if (Object.keys(errors).length > 0) return errors;
