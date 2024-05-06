@@ -23,6 +23,7 @@ export const fetchAddress = createAsyncThunk(
     const address = `${addressObj?.locality}, ${addressObj?.city} ${addressObj?.postcode}, ${addressObj?.countryName}`;
 
     // 3) Then we return an object with the data that we are interested in
+
     return { position, address };
   },
 );
@@ -49,8 +50,9 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchAddress.fulfilled, (state, action) => {
-        state.position = action.position;
-        state.address = action.address;
+        state.position = action.payload.position;
+        state.address = action.payload.address;
+
         state.status = "idle";
       })
       .addCase(fetchAddress.rejected, (state, action) => {
